@@ -15,7 +15,7 @@ class IR_Sensor:
         return self.sensor.value
 
     def stream_input(self):
-        self._thread = Thread(target=self._stream_input, args=(lambda: STOP_THREAD))
+        self._thread = Thread(target=self._stream_input, args=(lambda: STOP_THREAD,))
         self._thread.start()
 
     def _stream_input(self, stop):
