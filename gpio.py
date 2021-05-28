@@ -27,6 +27,7 @@ class IR_Sensor:
 
     def stop_stream(self):
         if self._thread:
+            global STOP_THREAD
             STOP_THREAD = True
             self._thread.join()
             STOP_THREAD = False
