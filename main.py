@@ -6,10 +6,13 @@ import messages
 def main():
     sensor = gpio.IR_Sensor(14)
     ir_led = gpio.IR_LED(15)
-    sensor.stream_input()
-    ir_led.blink(on_time=0.5, off_time=0.5)
-    time.sleep(10)
-    sensor.stop_stream()
+    sensor.start()
+    ir_led.blink(n=100)
+    t = []
+    for _ in range(1000):
+        t.append(sensor.get())
+    sensor.stop()
+    print(t)
 
 
 if __name__ == "__main__":
