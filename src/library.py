@@ -63,7 +63,7 @@ class IR_Sensor:
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
             value_buffer.put(value)
-            #print(f"values: {value}")
+            print(f"values: {value}")
             if value < 0:
                 continue
             elif value <= self.threshold:
@@ -93,8 +93,8 @@ class IR_Sensor:
 
     def stop(self):
         self._stop = True
-        self.io_thread.join()
         self.convert_thread.join()
+        self.io_thread.join()
         self._stop = False
 
     def get(self):
