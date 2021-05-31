@@ -65,7 +65,7 @@ class IR_Sensor:
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
             value_buffer.put(value)
-            print(f"values: {value}")
+            #print(f"values: {value}")
             if value < 0:
                 continue
             elif previous_value == 0 and value_buffer.value == 0:
