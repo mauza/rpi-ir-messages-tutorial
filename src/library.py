@@ -116,6 +116,7 @@ class IR_LED:
     def send_msg(self, msg):
         encoded_msg = serialize_message(msg)
         for code in encoded_msg:
+            print(f"sending ascii code: {code}")
             self.blink(n=code)
             time.sleep(0.06)
 
