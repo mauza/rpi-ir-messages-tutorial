@@ -5,7 +5,7 @@ import library
 
 
 def main(duration):
-    sensor = library.IR_Sensor(14)
+    sensor = library.IR_Sensor(18)
     sensor.start()
     time.sleep(duration)
     sensor.stop()

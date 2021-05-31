@@ -121,5 +121,5 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(0.06)
+            time.sleep(0.2)
 
