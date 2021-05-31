@@ -1,18 +1,24 @@
+import queue
 import time
-import gpio
-import messages
+
+import library
 
 
 def main():
-    sensor = gpio.IR_Sensor(14)
-    ir_led = gpio.IR_LED(15)
+    # Setup everything
+    sensor = library.IR_Sensor(14)
+    ir_led = library.IR_LED(15)
     sensor.start()
-    ir_led.blink(n=100)
-    t = []
-    for _ in range(1000):
-        t.append(sensor.get())
+    ir_led.off()
+
+    # Send message
+    msg = "Hello world"
+    encoded_msg = messages.serialize_message(msg)
+    for code in encoded_msg:
+        ir_led.blink(n=code)
+        time.sleep(0.06)
+    time.sleep(20)
     sensor.stop()
-    print(t)
 
 
 if __name__ == "__main__":
