@@ -1,4 +1,3 @@
-import queue
 import time
 
 import library
@@ -13,11 +12,11 @@ def main():
 
     # Send message
     msg = "Hello world"
-    encoded_msg = messages.serialize_message(msg)
+    encoded_msg = library.serialize_message(msg)
     for code in encoded_msg:
         ir_led.blink(n=code)
         time.sleep(0.06)
-    time.sleep(20)
+    time.sleep(15)
     sensor.stop()
 
 
