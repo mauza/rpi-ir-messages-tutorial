@@ -52,7 +52,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(20)
+        raw_buffer = Buffer(5)
         value_buffer = Buffer(30)
         previous_value = 0
         tmp_ascii = 0
