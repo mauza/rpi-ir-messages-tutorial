@@ -63,18 +63,20 @@ class IR_Sensor:
             raw_value = self.raw_q.get()
             short_buffer.put(raw_value)
             long_buffer.put(raw_value)
-            current_value = short_buffer.value()
-            if current_value < 0:
+            short_value = short_buffer.value()
+            long_value = long_buffer.value()
+            print(f"long value: {long_value}")
+            if short_value < 0:
                 continue
-            elif previous_value == 0 and current_value <= 0.1:
+            elif previous_value == 0 and long_value <= 0.1:
                 ascii_list.append(tmp_ascii)
                 tmp_ascii = 0
                 continue
-            elif current_value <= self.threshold:
+            elif short_value <= self.threshold:
                 previous_value = 0
-            elif current_value > self.threshold:
+            elif short_value > self.threshold:
                 if previous_value == 0:
-                    print(tmp_ascii)
+                    print(f"ascii tmp value: {tmp_ascii}")
                     tmp_ascii += 1
                 previous_value = 1
 
