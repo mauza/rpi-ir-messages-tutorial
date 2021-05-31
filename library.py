@@ -25,7 +25,7 @@ class Buffer:
 
     def value(self):
         current_len = len(self.buffer)
-        if current_len < 5:
+        if current_len < self.size:
             return -1
         return sum(self.buffer)/current_len
 
@@ -52,7 +52,7 @@ class IR_Sensor:
     def _convert_input(self, stop):
         start_time = time.time()
         ascii_list = []
-        buffer = Buffer(15)
+        buffer = Buffer(5)
         previous_value = 0
         tmp_ascii = 0
         while True:
