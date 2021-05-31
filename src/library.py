@@ -68,14 +68,15 @@ class IR_Sensor:
             #print(f"values: {value}")
             if value < 0:
                 continue
-            elif previous_value == 0 and value_buffer.value == 0:
-                ascii_list.append(tmp_ascii)
-                tmp_ascii = 0
-                continue
             elif value <= self.threshold:
                 if previous_value == 1:
+                    print(tmp_ascii)
                     tmp_ascii += 1
-                previous_value = 0
+                    previous_value = 0
+                elif previous_value == 0:
+                    if value_buffer.value == 0:
+                        ascii_list.append(tmp_ascii)
+                        tmp_ascii = 0
             elif value > self.threshold:
                 previous_value = 1
 
