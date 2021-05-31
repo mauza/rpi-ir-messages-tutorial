@@ -34,6 +34,7 @@ class Buffer:
 
 
 class IR_Sensor:
+    threshold = 0.4
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -69,10 +70,11 @@ class IR_Sensor:
                 ascii_list.append(tmp_ascii)
                 tmp_ascii = 0
                 continue
-            elif current_value <= 0.5:
+            elif current_value <= self.threshold:
                 previous_value = 0
-            elif current_value > 0.5:
+            elif current_value > self.threshold:
                 if previous_value == 0:
+                    print(tmp_ascii)
                     tmp_ascii += 1
                 previous_value = 1
 
