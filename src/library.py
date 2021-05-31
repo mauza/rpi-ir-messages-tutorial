@@ -52,7 +52,7 @@ class IR_Sensor:
     def _convert_input(self, stop):
         start_time = time.time()
         ascii_list = []
-        buffer = Buffer(5)
+        buffer = Buffer(11)
         previous_value = 0
         tmp_ascii = 0
         while True:
@@ -60,10 +60,10 @@ class IR_Sensor:
                 break
             buffer.put(self.raw_q.get())
             current_value = buffer.value()
-            print(current_value)
+            print(buffer.buffer)
             if current_value < 0:
                 continue
-            elif previous_value == 0 and current_value <= 0.1 and buffer.length() == buffer.size:
+            elif previous_value == 0 and current_value <= 0.1:
                 ascii_list.append(tmp_ascii)
                 tmp_ascii = 0
                 continue
