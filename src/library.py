@@ -52,8 +52,6 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        start_time = time.time()
-        ascii_list = []
         raw_buffer = Buffer(20)
         value_buffer = Buffer(2)
         previous_value = 0
@@ -77,14 +75,8 @@ class IR_Sensor:
                 previous_value = 1
 
             if tmp_ascii != 0 and value_buffer.value == 0:
-                ascii_list.append(tmp_ascii)
+                print(deserialize_message([tmp_ascii]), end='')
                 tmp_ascii = 0
-
-            current_time = time.time()
-            if len(ascii_list) > 2 or current_time - start_time >= 20:
-                start_time = current_time
-                print(deserialize_message(ascii_list), end='')
-                ascii_list = []
 
 
     def _stream_input(self, stop):
