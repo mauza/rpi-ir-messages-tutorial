@@ -43,6 +43,7 @@ class IR_Sensor:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.sensor = gpiozero.InputDevice(pin_num)
+        self.raw_q = queue.SimpleQueue()
         self._stop = False
 
     def start(self):
