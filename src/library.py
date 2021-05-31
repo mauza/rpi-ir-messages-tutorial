@@ -75,6 +75,7 @@ class IR_Sensor:
             elif current_value > 0.5:
                 if previous_value == 0:
                     tmp_ascii += 1
+                previous_value = 1
 
             current_time = time.time()
             if current_time - start_time >= 15:
@@ -105,8 +106,8 @@ class IR_LED:
         self.LED = gpiozero.LED(pin_num)
 
     def blink(self, n):
-        on_time = 0.1
-        off_time = 0.1
+        on_time = 0.05
+        off_time = 0.05
         self.LED.blink(on_time, off_time, n=n, background=False)
 
     def off(self):
