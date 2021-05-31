@@ -1,4 +1,4 @@
-import time, queue
+import time, queue, sys
 from threading import Thread
 
 import gpiozero
@@ -82,6 +82,7 @@ class IR_Sensor:
             if off_iter >= 100:
                 ascii_code = sum(value_buffer.buffer)
                 print(deserialize_message([ascii_code]), end='')
+                sys.stdout.flush()
                 #print(value_buffer.buffer)
                 value_buffer.empty()
                 off_iter = 0
