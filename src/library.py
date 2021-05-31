@@ -88,7 +88,6 @@ class IR_Sensor:
             if stop():
                 break
             self.raw_q.put(self.sensor.value)
-            time.sleep(0.001)
 
     def stop(self):
         self._stop = True
