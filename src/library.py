@@ -73,6 +73,7 @@ class IR_Sensor:
                 if previous_value == 1:
                     value_buffer.put(0)
                 previous_value = 0
+                off_iter += 1
             elif value > self.threshold:
                 if previous_value == 0:
                     value_buffer.put(1)
