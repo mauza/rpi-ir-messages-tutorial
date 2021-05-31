@@ -66,6 +66,7 @@ class IR_Sensor:
             raw_value = self.raw_q.get()
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
+            print(value)
             if value < 0:
                 continue
             elif value <= self.threshold:
@@ -82,7 +83,7 @@ class IR_Sensor:
 
             if tmp_ascii != 0 and off_iter >= 500:
                 print(deserialize_message([tmp_ascii]), end='')
-                print(value_buffer.buffer)
+                #print(value_buffer.buffer)
                 value_buffer.empty()
                 tmp_ascii = 0
                 off_iter = 0
