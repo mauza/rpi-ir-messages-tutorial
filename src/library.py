@@ -35,7 +35,7 @@ class Buffer:
 
 
 class IR_Sensor:
-    threshold = 0.1
+    threshold = 0.05
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -55,7 +55,7 @@ class IR_Sensor:
         start_time = time.time()
         ascii_list = []
         raw_buffer = Buffer(20)
-        value_buffer = Buffer(10)
+        value_buffer = Buffer(2)
         previous_value = 0
         tmp_ascii = 0
         while True:
@@ -72,13 +72,13 @@ class IR_Sensor:
                 if previous_value == 1:
                     print(tmp_ascii)
                     tmp_ascii += 1
-                    previous_value = 0
-                elif previous_value == 0:
-                    if value_buffer.value == 0:
-                        ascii_list.append(tmp_ascii)
-                        tmp_ascii = 0
+                previous_value = 0
             elif value > self.threshold:
                 previous_value = 1
+
+            if tmp_ascii != 0 and value_buffer.value == 0:
+                ascii_list.append(tmp_ascii)
+                tmp_ascii = 0
 
             current_time = time.time()
             if len(ascii_list) > 2 or current_time - start_time >= 20:
