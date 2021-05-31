@@ -53,7 +53,7 @@ class IR_Sensor:
 
     def _convert_input(self, stop):
         raw_buffer = Buffer(20)
-        value_buffer = Buffer(10)
+        value_buffer = Buffer(30)
         previous_value = 0
         tmp_ascii = 0
         while True:
@@ -122,5 +122,5 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(POLL_INTERVAL*100)
+            time.sleep(POLL_INTERVAL*200)
 
