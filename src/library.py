@@ -59,6 +59,7 @@ class IR_Sensor:
         value_buffer = Buffer(1000)
         previous_value = 0
         tmp_ascii = 0
+        off_iter = 0
         while True:
             if stop():
                 break
@@ -71,13 +72,15 @@ class IR_Sensor:
                 if previous_value == 1:
                     value_buffer.put(0)
                     tmp_ascii += 1
+                else:
+                    off_iter += 1
                 previous_value = 0
             elif value > self.threshold:
                 if previous_value == 0:
                     value_buffer.put(1)
                 previous_value = 1
 
-            if tmp_ascii != 0 and sum(value_buffer.buffer[-10:-1]) == 0:
+            if tmp_ascii != 0 and off_iter >= 15:
                 print(deserialize_message([tmp_ascii]), end='')
                 print(value_buffer)
                 value_buffer.empty()
