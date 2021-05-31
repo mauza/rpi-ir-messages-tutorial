@@ -82,7 +82,7 @@ class IR_Sensor:
 
             if tmp_ascii != 0 and off_iter >= 15:
                 print(deserialize_message([tmp_ascii]), end='')
-                print(value_buffer)
+                print(value_buffer.buffer)
                 value_buffer.empty()
                 tmp_ascii = 0
             time.sleep(POLL_INTERVAL/2)
