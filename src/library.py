@@ -43,8 +43,6 @@ class IR_Sensor:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.sensor = gpiozero.InputDevice(pin_num)
-        self.raw_q = queue.SimpleQueue()
-        self.msg_q = queue.SimpleQueue()
         self._stop = False
 
     def start(self):
@@ -67,7 +65,6 @@ class IR_Sensor:
             value = raw_buffer.value()
             # if value > 0:
             #     print(value)
-            print(value_buffer.buffer)
             if value < 0:
                 continue
             elif value <= self.threshold:
