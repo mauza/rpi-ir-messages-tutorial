@@ -68,7 +68,7 @@ class IR_Sensor:
                 continue
             elif value <= self.threshold:
                 if previous_value == 1:
-                    print(tmp_ascii)
+                    #print(tmp_ascii)
                     tmp_ascii += 1
                 previous_value = 0
             elif value > self.threshold:
