@@ -80,10 +80,10 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= 200:
+            if off_iter >= 50:
                 ascii_code = sum(value_buffer.buffer)
                 print(deserialize_message([ascii_code]), end='')
-                print(value_buffer.buffer)
+                #print(value_buffer.buffer)
                 value_buffer.empty()
                 off_iter = 0
             time.sleep(POLL_INTERVAL/2)
