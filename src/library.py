@@ -107,8 +107,8 @@ class IR_LED:
         self.LED = gpiozero.LED(pin_num)
 
     def blink(self, n):
-        on_time = POLL_INTERVAL * 20
-        off_time = POLL_INTERVAL * 20
+        on_time = POLL_INTERVAL * 10
+        off_time = POLL_INTERVAL * 10
         self.LED.blink(on_time, off_time, n=n, background=False)
 
     def off(self):
