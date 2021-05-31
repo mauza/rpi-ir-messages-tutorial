@@ -80,7 +80,7 @@ class IR_Sensor:
                 previous_value = 1
 
             current_time = time.time()
-            if len(tmp_ascii) > 2 or current_time - start_time >= 20:
+            if len(ascii_list) > 2 or current_time - start_time >= 20:
                 start_time = current_time
                 print(deserialize_message(ascii_list), end='')
                 ascii_list = []
