@@ -35,7 +35,7 @@ class Buffer:
 
 
 class IR_Sensor:
-    threshold = 0.05
+    threshold = 0.2
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -53,7 +53,7 @@ class IR_Sensor:
 
     def _convert_input(self, stop):
         raw_buffer = Buffer(5)
-        value_buffer = Buffer(30)
+        value_buffer = Buffer(20)
         previous_value = 0
         tmp_ascii = 0
         while True:
@@ -63,12 +63,12 @@ class IR_Sensor:
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
             value_buffer.put(value)
-            print(f"values: {value}")
+            # print(f"values: {value}")
             if value < 0:
                 continue
             elif value <= self.threshold:
                 if previous_value == 1:
-                    #print(tmp_ascii)
+                    print(tmp_ascii)
                     tmp_ascii += 1
                 previous_value = 0
             elif value > self.threshold:
