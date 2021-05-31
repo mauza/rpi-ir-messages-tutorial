@@ -53,7 +53,7 @@ class IR_Sensor:
         start_time = time.time()
         ascii_list = []
         long_buffer = Buffer(20)
-        short_buffer = Buffer(4)
+        short_buffer = Buffer(2)
         previous_value = 0
         tmp_ascii = 0
         while True:
