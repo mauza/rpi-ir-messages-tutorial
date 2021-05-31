@@ -75,10 +75,9 @@ class IR_Sensor:
             elif value > self.threshold:
                 if previous_value == 0:
                     value_buffer.put(1)
-                print(value)
                 previous_value = 1
 
-            if tmp_ascii != 0 and value_buffer.value() == 0:
+            if tmp_ascii != 0 and sum(value_buffer.buffer[-10:-1]) == 0:
                 print(deserialize_message([tmp_ascii]), end='')
                 print(value_buffer)
                 value_buffer.empty()
