@@ -63,16 +63,15 @@ class IR_Sensor:
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
             value_buffer.put(value)
-            # print(f"values: {value}")
             if value < 0:
                 continue
             elif value <= self.threshold:
                 if previous_value == 1:
-                    print(" ", end="")
                     #print(tmp_ascii)
                     tmp_ascii += 1
                 previous_value = 0
             elif value > self.threshold:
+                print(value)
                 previous_value = 1
 
             if tmp_ascii != 0 and value_buffer.value() == 0:
