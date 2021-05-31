@@ -66,6 +66,7 @@ class IR_Sensor:
             value = raw_buffer.value()
             value_buffer.put(value)
             #print(f"values: {value}")
+            print(f"value buffer: {value_buffer.value()}")
             if value < 0:
                 continue
             elif value <= self.threshold:
