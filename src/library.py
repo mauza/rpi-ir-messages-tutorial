@@ -80,7 +80,7 @@ class IR_Sensor:
                     value_buffer.put(1)
                 previous_value = 1
 
-            if tmp_ascii != 0 and off_iter >= 15:
+            if tmp_ascii != 0 and off_iter >= 100:
                 print(deserialize_message([tmp_ascii]), end='')
                 print(value_buffer.buffer)
                 value_buffer.empty()
