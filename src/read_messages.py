@@ -13,4 +13,5 @@ def main(duration):
 
 if __name__ == "__main__":
     # The first argument is the duration in seconds
-    main(sys.argv[1])
+    input_duration = int(sys.argv[1])
+    main(input_duration)
