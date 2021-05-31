@@ -68,6 +68,7 @@ class IR_Sensor:
                 continue
             elif value <= self.threshold:
                 if previous_value == 1:
+                    print(" ", end="")
                     #print(tmp_ascii)
                     tmp_ascii += 1
                 previous_value = 0
@@ -77,6 +78,7 @@ class IR_Sensor:
             if tmp_ascii != 0 and value_buffer.value() == 0:
                 print(deserialize_message([tmp_ascii]), end='')
                 tmp_ascii = 0
+            time.sleep(POLL_INTERVAL/2)
 
 
     def _stream_input(self, stop):
