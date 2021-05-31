@@ -80,7 +80,7 @@ class IR_Sensor:
                     value_buffer.put(1)
                 previous_value = 1
 
-            if tmp_ascii != 0 and off_iter >= 200:
+            if tmp_ascii != 0 and off_iter >= 400:
                 print(deserialize_message([tmp_ascii]), end='')
                 print(value_buffer.buffer)
                 value_buffer.empty()
@@ -117,8 +117,8 @@ class IR_LED:
         self.LED = gpiozero.LED(pin_num)
 
     def blink(self, n):
-        on_time = POLL_INTERVAL * 10
-        off_time = POLL_INTERVAL * 10
+        on_time = POLL_INTERVAL * 20
+        off_time = POLL_INTERVAL * 20
         self.LED.blink(on_time, off_time, n=n, background=False)
 
     def off(self):
