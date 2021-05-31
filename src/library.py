@@ -65,7 +65,7 @@ class IR_Sensor:
             long_buffer.put(raw_value)
             short_value = short_buffer.value()
             long_value = long_buffer.value()
-            print(f"long value: {long_value}")
+            print(f"values: {short_value} --- {long_value}")
             if short_value < 0:
                 continue
             elif previous_value == 0 and long_value <= 0.1:
