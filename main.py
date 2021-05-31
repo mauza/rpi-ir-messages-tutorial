@@ -12,10 +12,7 @@ def main():
 
     # Send message
     msg = "Hello world"
-    encoded_msg = library.serialize_message(msg)
-    for code in encoded_msg:
-        ir_led.blink(n=code)
-        time.sleep(0.06)
+    ir_led.send_msg(msg)
     time.sleep(15)
     sensor.stop()
 

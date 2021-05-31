@@ -115,4 +115,8 @@ class IR_LED:
         self.LED.on()
 
     def send_msg(self, msg):
+        encoded_msg = serialize_message(msg)
+        for code in encoded_msg:
+            self.blink(n=code)
+            time.sleep(0.06)
 
