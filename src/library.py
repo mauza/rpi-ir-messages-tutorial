@@ -55,7 +55,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(5)
+        raw_buffer = Buffer(10)
         value_buffer = Buffer(1000)
         previous_value = 0
         tmp_ascii = 0
@@ -80,7 +80,7 @@ class IR_Sensor:
                     value_buffer.put(1)
                 previous_value = 1
 
-            if tmp_ascii != 0 and off_iter >= 400:
+            if tmp_ascii != 0 and off_iter >= 500:
                 print(deserialize_message([tmp_ascii]), end='')
                 print(value_buffer.buffer)
                 value_buffer.empty()
