@@ -55,7 +55,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(10)
+        raw_buffer = Buffer(8)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -77,7 +77,7 @@ class IR_Sensor:
                     value_buffer.put(1)
                 previous_value = 1
 
-            if off_iter >= 500:
+            if off_iter >= 200:
                 ascii_code = sum(value_buffer.buffer)
                 print(deserialize_message([ascii_code]), end='')
                 print(value_buffer.buffer)
@@ -114,8 +114,8 @@ class IR_LED:
         self.LED = gpiozero.LED(pin_num)
 
     def blink(self, n):
-        on_time = POLL_INTERVAL * 20
-        off_time = POLL_INTERVAL * 20
+        on_time = POLL_INTERVAL * 15
+        off_time = POLL_INTERVAL * 15
         self.LED.blink(on_time, off_time, n=n, background=False)
 
     def off(self):
@@ -129,5 +129,5 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(POLL_INTERVAL*200)
+            time.sleep(POLL_INTERVAL*100)
 
