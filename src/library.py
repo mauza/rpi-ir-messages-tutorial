@@ -63,7 +63,6 @@ class IR_Sensor:
             short_buffer.put(raw_value)
             long_buffer.put(raw_value)
             current_value = short_buffer.value()
-            print(long_buffer.buffer)
             if current_value < 0:
                 continue
             elif previous_value == 0 and current_value <= 0.1:
@@ -88,7 +87,12 @@ class IR_Sensor:
         while True:
             if stop():
                 break
-            self.raw_q.put(self.sensor.value)
+            raw_value = self.sensor.value
+            if raw_value == 0:
+                value = 1
+            else:
+                value = 0
+            self.raw_q.put(value)
             time.sleep(0.001)
 
     def stop(self):
