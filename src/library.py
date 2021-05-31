@@ -107,8 +107,8 @@ class IR_LED:
         self.LED = gpiozero.LED(pin_num)
 
     def blink(self, n):
-        on_time = POLL_INTERVAL * 100
-        off_time = POLL_INTERVAL * 100
+        on_time = POLL_INTERVAL * 20
+        off_time = POLL_INTERVAL * 20
         self.LED.blink(on_time, off_time, n=n, background=False)
 
     def off(self):
@@ -122,5 +122,5 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(POLL_INTERVAL*1000)
+            time.sleep(POLL_INTERVAL*100)
 
