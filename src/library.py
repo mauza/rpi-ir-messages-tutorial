@@ -80,7 +80,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= 50:
+            if off_iter >= 100:
                 ascii_code = sum(value_buffer.buffer)
                 print(deserialize_message([ascii_code]), end='')
                 #print(value_buffer.buffer)
