@@ -58,9 +58,9 @@ class IR_Sensor:
         while True:
             if stop():
                 break
-            current_raw_value = self.raw_q.get()
-            buffer.put(current_raw_value)
+            buffer.put(self.raw_q.get())
             current_value = buffer.value()
+            print(current_value)
             if current_value < 0:
                 continue
             elif previous_value == 0 and current_value <= 0.1 and buffer.length() == buffer.size:
@@ -88,11 +88,10 @@ class IR_Sensor:
             time.sleep(0.001)
 
     def stop(self):
-        if self._thread:
-            self._stop = True
-            self.io_thread.join()
-            self.convert_thread.join()
-            self._stop = False
+        self._stop = True
+        self.io_thread.join()
+        self.convert_thread.join()
+        self._stop = False
 
     def get(self):
         return self.q.get()
