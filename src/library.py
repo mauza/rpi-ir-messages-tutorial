@@ -85,6 +85,7 @@ class IR_Sensor:
                 print(value_buffer.buffer)
                 value_buffer.empty()
                 tmp_ascii = 0
+                off_iter = 0
             time.sleep(POLL_INTERVAL/2)
 
 
