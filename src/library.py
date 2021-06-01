@@ -38,7 +38,7 @@ class Buffer:
 
 
 class IR_Sensor:
-    threshold = 0.01
+    threshold = 0.3
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
