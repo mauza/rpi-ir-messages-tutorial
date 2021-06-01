@@ -54,7 +54,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(9)
+        raw_buffer = Buffer(5)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -79,7 +79,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= POLL_INTERVAL*100000:
+            if off_iter >= POLL_INTERVAL*2000000:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
@@ -88,7 +88,7 @@ class IR_Sensor:
                 sys.stdout.flush()
                 value_buffer.empty()
                 off_iter = 0
-            time.sleep(POLL_INTERVAL/2)
+            time.sleep(POLL_INTERVAL/4)
 
 
     def _stream_input(self, stop):
@@ -135,4 +135,4 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(self.blink_interval*50)
+            time.sleep(self.blink_interval*55)
