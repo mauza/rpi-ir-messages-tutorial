@@ -79,7 +79,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= POLL_INTERVAL*90000:
+            if off_iter >= POLL_INTERVAL*100000:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
@@ -117,7 +117,7 @@ class IR_LED:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
-        self.blink_interval = POLL_INTERVAL * 15
+        self.blink_interval = POLL_INTERVAL * 100
 
     def blink(self, n):
         on_time = self.blink_interval
