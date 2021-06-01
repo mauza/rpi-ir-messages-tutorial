@@ -3,7 +3,7 @@ from threading import Thread
 
 import gpiozero
 
-POLL_INTERVAL = 0.001
+POLL_INTERVAL = 0.0005
 
 
 def serialize_message(message):
@@ -81,8 +81,8 @@ class IR_Sensor:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
-                print(ascii_code)
-                # print(deserialize_message([ascii_code]), end='')
+                # print(ascii_code)
+                print(deserialize_message([ascii_code]), end='')
                 sys.stdout.flush()
                 value_buffer.empty()
                 off_iter = 0
