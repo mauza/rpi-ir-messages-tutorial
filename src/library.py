@@ -38,7 +38,7 @@ class Buffer:
 
 
 class IR_Sensor:
-    threshold = 0.1
+    threshold = 0.05
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -54,7 +54,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(10)
+        raw_buffer = Buffer(7)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
