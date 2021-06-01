@@ -3,7 +3,7 @@ from threading import Thread
 
 import gpiozero
 
-POLL_INTERVAL = 0.0007
+POLL_INTERVAL = 0.0005
 
 
 def serialize_message(message):
@@ -117,7 +117,7 @@ class IR_LED:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
-        self.blink_interval = POLL_INTERVAL * 15
+        self.blink_interval = POLL_INTERVAL * 20
 
     def blink(self, n):
         on_time = self.blink_interval
