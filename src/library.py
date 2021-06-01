@@ -3,7 +3,7 @@ from threading import Thread
 
 import gpiozero
 
-POLL_INTERVAL = 0.005
+POLL_INTERVAL = 0.0001
 
 
 def serialize_message(message):
@@ -54,7 +54,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(10)
+        raw_buffer = Buffer(9)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -117,7 +117,7 @@ class IR_LED:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
-        self.blink_interval = POLL_INTERVAL * 10
+        self.blink_interval = POLL_INTERVAL * 25
 
     def blink(self, n):
         on_time = self.blink_interval
