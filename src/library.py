@@ -81,6 +81,8 @@ class IR_Sensor:
 
             if off_iter >= POLL_INTERVAL*50000:
                 ascii_code = sum(value_buffer.buffer)
+                if ascii_code == 0:
+                    continue
                 print(ascii_code)
                 # print(deserialize_message([ascii_code]), end='')
                 sys.stdout.flush()
