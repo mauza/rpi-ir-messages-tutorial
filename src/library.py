@@ -3,7 +3,7 @@ from threading import Thread
 
 import gpiozero
 
-POLL_INTERVAL = 0.01
+POLL_INTERVAL = 0.005
 
 
 def serialize_message(message):
