@@ -88,6 +88,7 @@ class IR_Sensor:
                 sys.stdout.flush()
                 value_buffer.empty()
                 off_iter = 0
+            time.sleep(POLL_INTERVAL/2)
 
 
     def _stream_input(self, stop):
@@ -134,5 +135,4 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(self.blink_interval * 50)
-
+            time.sleep(self.blink_interval*50)
