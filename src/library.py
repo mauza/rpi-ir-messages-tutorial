@@ -79,7 +79,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= POLL_INTERVAL*50000:
+            if off_iter >= POLL_INTERVAL*70000:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
