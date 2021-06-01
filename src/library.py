@@ -79,7 +79,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= POLL_INTERVAL*5000000:
+            if off_iter >= 500:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
@@ -134,5 +134,5 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(self.blink_interval*55)
+            time.sleep(0.1)
 
