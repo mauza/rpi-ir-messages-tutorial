@@ -86,7 +86,6 @@ class IR_Sensor:
                 sys.stdout.flush()
                 value_buffer.empty()
                 off_iter = 0
-            time.sleep(POLL_INTERVAL/2)
 
 
     def _stream_input(self, stop):
