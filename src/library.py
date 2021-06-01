@@ -54,7 +54,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(4)
+        raw_buffer = Buffer(10)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -68,12 +68,12 @@ class IR_Sensor:
             #     print(value)
             if value < 0:
                 continue
-            elif value <= self.threshold:
+            elif value < self.threshold:
                 if previous_value == 1:
                     value_buffer.put(0)
                 previous_value = 0
                 off_iter += 1
-            elif value > self.threshold:
+            elif value >= self.threshold:
                 if previous_value == 0:
                     value_buffer.put(1)
                 off_iter = 0
