@@ -83,10 +83,9 @@ class IR_Sensor:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
-                print(ascii_code)
-                # print(deserialize_message([ascii_code]), end='')
+                # print(ascii_code)
+                print(deserialize_message([ascii_code]), end='')
                 sys.stdout.flush()
-                #print(value_buffer.buffer)
                 value_buffer.empty()
                 off_iter = 0
             time.sleep(POLL_INTERVAL/2)
@@ -118,7 +117,7 @@ class IR_LED:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
-        self.blink_interval = POLL_INTERVAL * 15
+        self.blink_interval = POLL_INTERVAL * 10
 
     def blink(self, n):
         on_time = self.blink_interval
