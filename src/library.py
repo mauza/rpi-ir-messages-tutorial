@@ -26,8 +26,8 @@ class Buffer:
 
     def value(self):
         current_len = len(self.buffer)
-        if current_len < self.size:
-            return -1
+        if current_len == 0:
+            return 0
         return sum(self.buffer)/current_len
 
     def length(self):
@@ -38,7 +38,8 @@ class Buffer:
 
 
 class IR_Sensor:
-    threshold = 0.2
+    on_threshold = 0.4
+    off_threshold = 0.1
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -54,7 +55,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(9)
+        raw_buffer = Buffer(11)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -66,14 +67,10 @@ class IR_Sensor:
             value = raw_buffer.value()
             # if value > 0:
             #     print(value)
-            if value < 0:
-                continue
-            elif value < self.threshold:
-                if previous_value == 1:
-                    value_buffer.put(0)
+            if value <= self.off_threshold:
                 previous_value = 0
                 off_iter += 1
-            elif value >= self.threshold:
+            elif value >= self.on_threshold:
                 if previous_value == 0:
                     value_buffer.put(1)
                 off_iter = 0
@@ -88,7 +85,6 @@ class IR_Sensor:
                 sys.stdout.flush()
                 value_buffer.empty()
                 off_iter = 0
-            time.sleep(POLL_INTERVAL/4)
 
 
     def _stream_input(self, stop):
@@ -117,7 +113,7 @@ class IR_LED:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
-        self.blink_interval = POLL_INTERVAL * 400
+        self.blink_interval = POLL_INTERVAL * 500
 
     def blink(self, n):
         on_time = self.blink_interval
