@@ -98,7 +98,7 @@ class IR_Sensor:
             else:
                 value = 0
             self.raw_q.put(value)
-            time.sleep(POLL_INTERVAL)
+            #time.sleep(POLL_INTERVAL)
 
     def stop(self):
         self._stop = True
