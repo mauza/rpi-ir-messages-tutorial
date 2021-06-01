@@ -64,6 +64,8 @@ class IR_Sensor:
             raw_value = self.raw_q.get()
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
+            if value > 0:
+                print(value)
             if value < 0:
                 continue
             elif value < self.threshold:
@@ -77,7 +79,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= POLL_INTERVAL*50000000:
+            if off_iter >= POLL_INTERVAL*5000000:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
