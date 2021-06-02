@@ -3,8 +3,6 @@ from threading import Thread
 
 import gpiozero
 
-POLL_INTERVAL = 0.00001
-
 
 def serialize_message(message):
     return [ord(character) for character in message]
@@ -38,7 +36,7 @@ class Buffer:
 
 
 class IR_Sensor:
-    on_threshold = 0.4
+    on_threshold = 0.45
     off_threshold = 0.1
 
     def __init__(self, pin_num):
@@ -55,7 +53,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(11)
+        raw_buffer = Buffer(100)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -76,7 +74,7 @@ class IR_Sensor:
                 off_iter = 0
                 previous_value = 1
 
-            if off_iter >= POLL_INTERVAL*40000000:
+            if off_iter >= 4000:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
@@ -97,7 +95,6 @@ class IR_Sensor:
             else:
                 value = 0
             self.raw_q.put(value)
-            time.sleep(POLL_INTERVAL)
 
     def stop(self):
         self._stop = True
@@ -113,7 +110,7 @@ class IR_LED:
     def __init__(self, pin_num):
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
-        self.blink_interval = POLL_INTERVAL * 500
+        self.blink_interval = 0.09
 
     def blink(self, n):
         on_time = self.blink_interval
@@ -131,4 +128,4 @@ class IR_LED:
         for code in encoded_msg:
             print(f"sending ascii code: {code}")
             self.blink(n=code)
-            time.sleep(self.blink_interval*111)
+            time.sleep(self.blink_interval*150)
