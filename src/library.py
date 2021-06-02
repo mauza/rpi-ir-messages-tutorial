@@ -36,8 +36,8 @@ class Buffer:
 
 
 class IR_Sensor:
-    on_threshold = 0.25
-    off_threshold = 0.05
+    on_threshold = 0.05
+    off_threshold = 0.02
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -93,7 +93,7 @@ class IR_Sensor:
             else:
                 value = 0
             self.raw_q.put(value)
-            time.sleep(0.0000001)
+            time.sleep(0.00000001)
 
     def stop(self):
         self._stop = True
@@ -110,7 +110,7 @@ class IR_LED:
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
         self.LED.off()
-        self.blink_interval = 0.01
+        self.blink_interval = 0.0044
 
     def blink(self, n):
         for i in range(n):
