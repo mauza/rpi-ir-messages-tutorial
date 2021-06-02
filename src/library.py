@@ -111,12 +111,12 @@ class IR_LED:
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
         self.LED.off()
-        self.blink_interval = 0.09
+        self.blink_interval = 0.009
 
     def blink(self, n):
         for i in range(n):
             self.LED.on()
-            time.sleep(self.blink_interval)
+            time.sleep(self.blink_interval*1.5)
             self.LED.off()
             time.sleep(self.blink_interval)
 
