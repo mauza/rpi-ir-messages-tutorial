@@ -36,8 +36,8 @@ class Buffer:
 
 
 class IR_Sensor:
-    on_threshold = 0.45
-    off_threshold = 0.1
+    on_threshold = 0.25
+    off_threshold = 0.05
 
     def __init__(self, pin_num):
         self.pin_num = pin_num
@@ -53,7 +53,7 @@ class IR_Sensor:
         self.convert_thread.start()
 
     def _convert_input(self, stop):
-        raw_buffer = Buffer(100)
+        raw_buffer = Buffer(50)
         value_buffer = Buffer(1000)
         previous_value = 0
         off_iter = 0
@@ -63,8 +63,6 @@ class IR_Sensor:
             raw_value = self.raw_q.get()
             raw_buffer.put(raw_value)
             value = raw_buffer.value()
-            # if value > 0:
-            #     print(value)
             if value <= self.off_threshold:
                 previous_value = 0
                 off_iter += 1
@@ -78,8 +76,8 @@ class IR_Sensor:
                 ascii_code = sum(value_buffer.buffer)
                 if ascii_code == 0:
                     continue
-                print(ascii_code)
-                # print(deserialize_message([ascii_code]), end='')
+                # print(ascii_code)
+                print(deserialize_message([ascii_code]), end='')
                 sys.stdout.flush()
                 value_buffer.empty()
                 off_iter = 0
@@ -95,6 +93,7 @@ class IR_Sensor:
             else:
                 value = 0
             self.raw_q.put(value)
+            time.sleep(0.0000001)
 
     def stop(self):
         self._stop = True
@@ -111,14 +110,14 @@ class IR_LED:
         self.pin_num = pin_num
         self.LED = gpiozero.LED(pin_num)
         self.LED.off()
-        self.blink_interval = 0.009
+        self.blink_interval = 0.01
 
     def blink(self, n):
         for i in range(n):
             self.LED.on()
-            time.sleep(self.blink_interval*1.5)
-            self.LED.off()
             time.sleep(self.blink_interval)
+            self.LED.off()
+            time.sleep(self.blink_interval*1.2)
 
     def off(self):
         self.LED.off()
